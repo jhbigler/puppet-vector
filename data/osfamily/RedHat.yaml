@@ -1,0 +1,2 @@
+---
+vector::environment_file: "/etc/sysconfig/%{lookup('vector::service_name')}" 

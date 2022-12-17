@@ -1,0 +1,7 @@
+# This file is managed by puppet
+# This file can theoretically contain a bunch of environment variables
+# for Vector.  See https://vector.dev/docs/setup/configuration/#environment-variables
+# for details.
+<%- $vector::environment_vars.each |$name, $value| { -%>
+<%= $name %>="<%= $value %>"
+<% } %>

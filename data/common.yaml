@@ -1,0 +1,13 @@
+---
+vector::version: ~
+vector::service_name: vector
+vector::install_vector: true
+vector::config_dir: '/etc/vector'
+vector::data_dir: '/var/lib/vector'
+vector::user: 'vector'
+vector::group: 'vector'
+vector::manage_systemd: true
+vector::vector_executable: '/usr/bin/vector'
+vector::service_ensure: true
+vector::service_enabled: true
+#vector::environment_file: '/etc/sysconfig/vector'

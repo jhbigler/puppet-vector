@@ -1,0 +1,19 @@
+[Unit]
+Description=Vector log and metric shipping
+Documentation=https://vector.dev
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+User=<%= $vector::user %>
+Group=<%= $vector::group %>
+ExecStartPre=<%= $vector::vector_executable %> validate
+ExecStart=<%= $vector::vector_executable %> -c <%= $vector::configure::global_opts_file %> -C <%= $vector::setup::topology_files_dir %>
+ExecReload=<%= $vector::vector_executable %> validate
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=no
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+EnvironmentFile=-<%= $vector::environment_file %>
+
+[Install]
+WantedBy=multi-user.target

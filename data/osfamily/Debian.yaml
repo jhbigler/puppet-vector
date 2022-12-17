@@ -1,0 +1,2 @@
+---
+vector::environment_file: "/etc/default/%{lookup('vector::service_name')}" 
