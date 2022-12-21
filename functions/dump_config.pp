@@ -1,4 +1,4 @@
-#
+# Takes a hash and a format string and dumps it in that format
 function vector::dump_config(
   Hash $data,
   Vector::ValidConfigFormat $format = 'toml',

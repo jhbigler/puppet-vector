@@ -8,7 +8,7 @@ type Vector::ValidConfigFormat = Enum['json','yaml','yml','toml']
 #   Vector module for Puppet
 #
 # Installs, configures, then runs the Vector log and metric tool on RedHat and Debian type systems
-# Note - this does not manage the repositories, it assumed they are already configured
+# Note - this does not manage the repositories, it is assumed they are already configured
 #
 # @example
 #   include vector
