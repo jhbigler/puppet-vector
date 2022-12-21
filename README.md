@@ -24,14 +24,14 @@ This module requires puppet-stdlib.
 
 ### Beginning with vector
 
-This module will not configure yum or apt repositories, those should be configured outside of this module.
+This module will not configure yum or apt repositories, those should be configured outside of this module. It will also not create the user that vector runs as.
 
 ## Usage
 
 There are two ways to configure topologies:
 1. Using class parameters
     - These can be set with Hiera!
-1. Using defined types:
+1. Using defined types
     - Especially useful if your modules need to inject their own vector components
     - ```vector::source``` to configure a vector source
     - ```vector::transform``` to configure a vector transform
@@ -45,7 +45,7 @@ You can even use a mix of both of these strategies.
 Using ```vector::configfile```
 
 ```puppet
-require 'vector'
+require vector
 
 vector::configfile { 'vector':
   data => {
@@ -71,9 +71,10 @@ vector::configfile { 'vector':
 ```
 
 Using ```vector::source```, ```vector::transform```, and ```vector::sink```
+Note: 'type' is required for all of these defined types and 'inputs' is required for transform and sink types. Addition configuration parameters for these should be put in the 'parameters' hash.
 
 ```puppet
-require 'vector'
+require vector
 
 vector::source { 'logfile_input':
     type       => 'file',
@@ -130,6 +131,7 @@ class { 'vector':
       'inputs'     => ['logfiles', 'syslogs'],
       'parameters' => {
         'endpoints' => 'elastic1:9200',
+        'pipeline'  => 'logs',
       },
     },
   },
@@ -156,7 +158,8 @@ vector::sinks:
     type: elasticsearch
     inputs: ['logfiles','syslogs']
     parameters:
-      endpoints: 'elastic1:9200
+      endpoints: 'elastic1:9200'
+      pipeline: logs
 ```
 
 ## Reference
