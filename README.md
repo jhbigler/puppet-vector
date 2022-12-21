@@ -2,16 +2,6 @@
 
 This puppet module installs, configures, and runs the [Vector](https://vector.dev/) observability tool. 
 
-## Table of Contents
-
-1. [Description](#description)
-1. [Setup - The basics of getting started with vector](#setup)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with vector](#beginning-with-vector)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
-
 ## Description
 
 The vector module installs, configures, and runs the Vector observability tool. This module is designed for Redhat and Fedora type systems, and also assumes it uses systemd for managing services.
