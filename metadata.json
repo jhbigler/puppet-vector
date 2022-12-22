@@ -1,10 +1,11 @@
 {
   "name": "jhbigler-vector",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "author": "jhbigler",
-  "summary": "Installs and configured Vector",
+  "summary": "Installs and configures Vector",
   "license": "Apache-2.0",
   "source": "git://github.com/jhbigler/puppet-vector.git",
+  "project_page": "https://github.com/jhbigler/puppet-vector",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -27,7 +28,8 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7","8"
+        "7",
+        "8"
       ]
     },
     {

@@ -20,7 +20,7 @@ define vector::source (
     },
   }
 
-  $source_file_name = "${$vector::setup::topology_files_dir}/source_${title}.${format}"
+  $source_file_name = "${vector::setup::topology_files_dir}/source_${title}.${format}"
 
   file { $source_file_name:
     ensure  => file,

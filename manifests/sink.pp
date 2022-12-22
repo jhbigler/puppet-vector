@@ -23,7 +23,7 @@ define vector::sink (
     },
   }
 
-  $sink_file_name = "${$vector::setup::topology_files_dir}/sink_${title}.${format}"
+  $sink_file_name = "${vector::setup::topology_files_dir}/sink_${title}.${format}"
 
   file { $sink_file_name:
     ensure  => file,

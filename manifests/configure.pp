@@ -14,7 +14,7 @@ class vector::configure {
 
   create_resources(vector::configfile, $vector::config_files)
   create_resources(vector::source,     $vector::sources)
-  create_resources(vector::transform,  $vector::transform)
+  create_resources(vector::transform,  $vector::transforms)
   create_resources(vector::sink,       $vector::sinks)
 
   file { $vector::environment_file:

@@ -23,7 +23,7 @@ define vector::transform (
     },
   }
 
-  $transform_file_name = "${$vector::setup::topology_files_dir}/transform_${title}.${format}"
+  $transform_file_name = "${vector::setup::topology_files_dir}/transform_${title}.${format}"
 
   file { $transform_file_name:
     ensure  => file,
