@@ -17,19 +17,21 @@ define vector::sink (
   Hash                      $parameters,
   Vector::ValidConfigFormat $format = 'toml',
 ) {
-  $sink_hash = {
-    'sinks' => {
-      $title => $parameters + { 'type' => $type, 'inputs' => $inputs },
-    },
-  }
+  # $sink_hash = {
+  #   'sinks' => {
+  #     $title => $parameters + { 'type' => $type, 'inputs' => $inputs },
+  #   },
+  # }
 
-  $sink_file_name = "${vector::setup::topology_files_dir}/sink_${title}.${format}"
+  $sink_hash = $parameters + { 'type' => $type, 'inputs' => $inputs }
+
+  $sink_file_name = "${vector::setup::sinks_dir}/${title}.${format}"
 
   file { $sink_file_name:
     ensure  => file,
     content => vector::dump_config($sink_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::topology_files_dir],
+    require => File[$vector::setup::sinks_dir],
     notify  => Service[$vector::service_name],
   }
 }

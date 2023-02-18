@@ -14,19 +14,21 @@ define vector::source (
   Hash                      $parameters,
   Vector::ValidConfigFormat $format = 'toml',
 ) {
-  $source_hash = {
-    'sources' => {
-      $title => $parameters + { 'type' => $type },
-    },
-  }
+  # $source_hash = {
+  #   'sources' => {
+  #     $title => $parameters + { 'type' => $type },
+  #   },
+  # }
 
-  $source_file_name = "${vector::setup::topology_files_dir}/source_${title}.${format}"
+  $source_hash = $parameters + { 'type' => $type }
+
+  $source_file_name = "${vector::setup::sources_dir}/${title}.${format}"
 
   file { $source_file_name:
     ensure  => file,
     content => vector::dump_config($source_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::topology_files_dir],
+    require => File[$vector::setup::sources_dir],
     notify  => Service[$vector::service_name],
   }
 }

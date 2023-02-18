@@ -26,9 +26,9 @@ define vector::configfile (
     fail('Unable to guess the format to use')
   }
 
-  $file_name = "config_${title}.${file_format}"
+  $file_name = "${title}.${file_format}"
 
-  $config_file_name = "${$vector::setup::topology_files_dir}/${file_name}"
+  $config_file_name = "${vector::setup::topology_files_dir}/${file_name}"
 
   $file_content = $content ? {
     undef => vector::dump_config($data, $file_format),
