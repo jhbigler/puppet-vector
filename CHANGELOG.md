@@ -11,3 +11,13 @@ All notable changes to this project will be documented in this file.
 * Accidently put the upper version limit for stdlib at 6.0 in previous versions of this module. Removed that upper limit here.
 
 **Known Issues**
+
+## Release 0.1.4
+
+**Features**
+
+**Bugfixes**
+* This module did not properly remove unmanaged vector config files in 0.1.3, that is fixed
+
+**Known Issues**
+

@@ -19,16 +19,17 @@ class vector::setup {
     mode   => '0755',
   }
   -> file { $topology_files_dir:
-    ensure => directory,
-    mode   => '0755',
-    purge  => true,
-    notify => Service[$vector::service_name],
+    ensure  => directory,
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    notify  => Service[$vector::service_name],
   }
   -> file { [$sources_dir, $transforms_dir, $sinks_dir]:
     ensure  => directory,
     mode    => '0755',
-    purge   => true,
     recurse => true,
+    purge   => true,
     notify  => Service[$vector::service_name],
   }
 }
