@@ -28,7 +28,5 @@ define vector::source (
     ensure  => file,
     content => vector::dump_config($source_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::sources_dir],
-    notify  => Service[$vector::service_name],
   }
 }

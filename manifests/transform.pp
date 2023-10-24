@@ -31,7 +31,5 @@ define vector::transform (
     ensure  => file,
     content => vector::dump_config($transform_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::transforms_dir],
-    notify  => Service[$vector::service_name],
   }
 }

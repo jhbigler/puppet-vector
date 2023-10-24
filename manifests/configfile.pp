@@ -20,7 +20,7 @@ define vector::configfile (
 
   if $format {
     $file_format = $format
-  } elsif $content {
+  } elsif $data {
     $file_format = 'toml'
   } else {
     fail('Unable to guess the format to use')
@@ -40,6 +40,6 @@ define vector::configfile (
     content => $file_content,
     mode    => '0644',
     require => File[$vector::setup::topology_files_dir],
-    notify  => Service[$vector::service_name],
+    notify  => Class['vector::service'],
   }
 }

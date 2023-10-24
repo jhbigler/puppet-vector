@@ -9,8 +9,9 @@
 * [`vector`](#vector): Vector module for Puppet
 * [`vector::configure`](#vector--configure): Creates configuraton files, and creates systemd files if configured to do so
 * [`vector::install`](#vector--install): Installs vector, if configured to do so
-* [`vector::service`](#vector--service)
+* [`vector::service`](#vector--service): Manages the systemd service for vector
 * [`vector::setup`](#vector--setup): sets up some directories for configurations to go into
+* [`vector::user`](#vector--user): Private class that manages the user and group vector runs as
 
 ### Defined types
 
@@ -21,13 +22,13 @@
 
 ### Functions
 
-* [`vector::dump_config`](#vector--dump_config): Takes a hash and a format string and dumps it in that format
+* [`vector::dump_config`](#vector--dump_config): vector::dump_config
 
 ### Data types
 
-* [`Vector::Enabled`](#Vector--Enabled)
-* [`Vector::Ensure`](#Vector--Ensure)
-* [`Vector::ValidConfigFormat`](#Vector--ValidConfigFormat)
+* [`Vector::Enabled`](#Vector--Enabled): defines a valid value for the 'enabled' parameter for the vector systemd service
+* [`Vector::Ensure`](#Vector--Ensure): defines a valid value for the vector systemd service 'ensure' parameter
+* [`Vector::ValidConfigFormat`](#Vector--ValidConfigFormat): defines the valid configuration file extensions for vector
 
 ## Classes
 
@@ -65,6 +66,10 @@ The following parameters are available in the `vector` class:
 * [`data_dir`](#-vector--data_dir)
 * [`user`](#-vector--user)
 * [`group`](#-vector--group)
+* [`manage_user`](#-vector--manage_user)
+* [`user_opts`](#-vector--user_opts)
+* [`manage_group`](#-vector--manage_group)
+* [`group_opts`](#-vector--group_opts)
 * [`service_name`](#-vector--service_name)
 * [`manage_systemd`](#-vector--manage_systemd)
 * [`vector_executable`](#-vector--vector_executable)
@@ -106,13 +111,37 @@ Directory for vector to store buffer and state data
 
 Data type: `String`
 
-What user to run Vector as, default 'vector'. Note - this module does not yet create the user
+What user to run Vector as, default 'vector'
 
 ##### <a name="-vector--group"></a>`group`
 
 Data type: `String`
 
 What group to run Vector as, default 'vector'
+
+##### <a name="-vector--manage_user"></a>`manage_user`
+
+Data type: `Boolean`
+
+Boolean to determine if puppet should manage the user vector runs as
+
+##### <a name="-vector--user_opts"></a>`user_opts`
+
+Data type: `Hash`
+
+Dictionary of options to pass into the user resource, other than 'name' (specified with vector::user) and 'ensure'
+
+##### <a name="-vector--manage_group"></a>`manage_group`
+
+Data type: `Boolean`
+
+Boolean to determine if puppet should manage the group vector runs as
+
+##### <a name="-vector--group_opts"></a>`group_opts`
+
+Data type: `Hash`
+
+Dictionary of options to pass into the group resource, other than 'name' (specified with vector::group) and 'ensure'
 
 ##### <a name="-vector--service_name"></a>`service_name`
 
@@ -208,11 +237,15 @@ vector::summary
 
 ### <a name="vector--service"></a>`vector::service`
 
-The vector::service class.
+vector::service
 
 ### <a name="vector--setup"></a>`vector::setup`
 
 vector::setup
+
+### <a name="vector--user"></a>`vector::user`
+
+vector::user
 
 ## Defined types
 
@@ -368,43 +401,43 @@ Default value: `'toml'`
 
 Type: Puppet Language
 
-Takes a hash and a format string and dumps it in that format
+vector::dump_config
 
 #### `vector::dump_config(Hash $data, Vector::ValidConfigFormat $format = 'toml')`
 
-Takes a hash and a format string and dumps it in that format
+vector::dump_config
 
-Returns: `String`
+Returns: `String` A String representing the dumped configuration
 
 ##### `data`
 
 Data type: `Hash`
 
-
+A puppet hash representing the configuration of some vector entity (source, transform, sink, etc)
 
 ##### `format`
 
 Data type: `Vector::ValidConfigFormat`
 
-
+What format to dump the $data parameter as (json, toml, yaml, yml)
 
 ## Data types
 
 ### <a name="Vector--Enabled"></a>`Vector::Enabled`
 
-The Vector::Enabled data type.
+defines a valid value for the 'enabled' parameter for the vector systemd service
 
 Alias of `Variant[Enum['manual','mask','delayed'], Boolean]`
 
 ### <a name="Vector--Ensure"></a>`Vector::Ensure`
 
-The Vector::Ensure data type.
+defines a valid value for the vector systemd service 'ensure' parameter
 
 Alias of `Variant[Enum['running','stopped'], Boolean]`
 
 ### <a name="Vector--ValidConfigFormat"></a>`Vector::ValidConfigFormat`
 
-The Vector::ValidConfigFormat data type.
+defines the valid configuration file extensions for vector
 
 Alias of `Enum['json', 'yaml', 'yml', 'toml']`
 

@@ -15,13 +15,9 @@ define vector::sink (
   String                    $type,
   Array[String]             $inputs,
   Hash                      $parameters,
-  Vector::ValidConfigFormat $format = 'toml',
+  Vector::ValidConfigFormat $format    = 'toml',
 ) {
-  # $sink_hash = {
-  #   'sinks' => {
-  #     $title => $parameters + { 'type' => $type, 'inputs' => $inputs },
-  #   },
-  # }
+  require vector::setup
 
   $sink_hash = $parameters + { 'type' => $type, 'inputs' => $inputs }
 
@@ -31,7 +27,5 @@ define vector::sink (
     ensure  => file,
     content => vector::dump_config($sink_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::sinks_dir],
-    notify  => Service[$vector::service_name],
   }
 }
