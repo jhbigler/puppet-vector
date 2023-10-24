@@ -14,7 +14,7 @@ This module requires puppet-stdlib.
 
 ### Beginning with vector
 
-This module will not configure yum or apt repositories, those should be configured outside of this module. It will also not create the user that vector runs as.
+This module will not configure yum or apt repositories, those should be configured outside of this module.
 
 ## Usage
 
