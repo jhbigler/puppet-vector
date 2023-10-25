@@ -10,4 +10,13 @@ describe 'vector' do
       it { is_expected.to compile }
     end
   end
+
+  context 'normal' do 
+    it do
+      #Ensure each sub class is contained
+      ['install', 'user', 'setup', 'configure', 'service'].each do |step|
+        is_expected.to contain_class("vector::#{step}")
+      end
+    end
+  end
 end

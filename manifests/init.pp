@@ -1,6 +1,3 @@
-type Vector::Ensure  = Variant[Enum['running','stopped'],Boolean]
-type Vector::Enabled = Variant[Enum['manual','mask','delayed'],Boolean]
-type Vector::ValidConfigFormat = Enum['json','yaml','yml','toml']
 #
 # vector
 #
@@ -27,9 +24,17 @@ type Vector::ValidConfigFormat = Enum['json','yaml','yml','toml']
 # @param data_dir
 #   Directory for vector to store buffer and state data
 # @param user
-#   What user to run Vector as, default 'vector'. Note - this module does not yet create the user
+#   What user to run Vector as, default 'vector'
 # @param group
 #   What group to run Vector as, default 'vector'
+# @param manage_user
+#   Boolean to determine if puppet should manage the user vector runs as
+# @param user_opts
+#   Dictionary of options to pass into the user resource, other than 'name' (specified with vector::user) and 'ensure'
+# @param manage_group
+#   Boolean to determine if puppet should manage the group vector runs as
+# @param group_opts
+#   Dictionary of options to pass into the group resource, other than 'name' (specified with vector::group) and 'ensure'
 # @param service_name
 #   Name of the service, default 'vector'
 # @param manage_systemd
@@ -61,6 +66,10 @@ class vector (
   String            $data_dir,
   String            $user,
   String            $group,
+  Boolean           $manage_user,
+  Hash              $user_opts,
+  Boolean           $manage_group,
+  Hash              $group_opts,
   String            $service_name,
   Boolean           $manage_systemd,
   String            $vector_executable,
@@ -75,11 +84,13 @@ class vector (
   Hash              $sinks              = {},
 ) {
   contain vector::install
+  contain vector::user
   contain vector::setup
   contain vector::configure
   contain vector::service
 
   Class['vector::install']
+  -> Class['vector::user']
   -> Class['vector::setup']
   -> Class['vector::configure']
   -> Class['vector::service']

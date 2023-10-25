@@ -1,4 +1,12 @@
-# Takes a hash and a format string and dumps it in that format
+# vector::dump_config
+#
+# @param data
+#   A puppet hash representing the configuration of some vector entity (source, transform, sink, etc)
+# @param format
+#   What format to dump the $data parameter as (json, toml, yaml, yml)
+#
+# @return
+#   A String representing the dumped configuration
 function vector::dump_config(
   Hash $data,
   Vector::ValidConfigFormat $format = 'toml',

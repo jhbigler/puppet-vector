@@ -10,4 +10,14 @@ vector::manage_systemd: true
 vector::vector_executable: '/usr/bin/vector'
 vector::service_ensure: true
 vector::service_enabled: true
-#vector::environment_file: '/etc/sysconfig/vector'
+vector::manage_user: false
+vector::manage_group: false
+vector::user_opts:
+  system: true
+  shell: /sbin/nologin
+  home: /var/lib/vector
+  comment: 'Vector observability data router'
+  groups: ['systend-journal', 'systemd-journal-remote']
+vector::group_opts: {}
+  
+vector::environment_file: '/etc/sysconfig/vector'

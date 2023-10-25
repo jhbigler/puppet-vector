@@ -3,13 +3,14 @@
 # @summary
 #   Creates configuraton files, and creates systemd files if configured to do so
 class vector::configure {
+  assert_private()
   $global_opts_file   = "${vector::config_dir}/global.yaml"
 
   file { $global_opts_file:
     ensure  => file,
     mode    => '0664',
     content => to_yaml($vector::global_options + { 'data_dir' => $vector::data_dir }),
-    notify  => Service[$vector::service_name],
+    notify  => Class['vector::service'],
   }
 
   create_resources(vector::configfile, $vector::config_files)
@@ -20,7 +21,7 @@ class vector::configure {
   file { $vector::environment_file:
     ensure  => file,
     content => epp('vector/vector_env.epp'),
-    notify  => Service[$vector::service_name],
+    notify  => Class['vector::service'],
   }
 
   if $vector::manage_systemd {
@@ -29,7 +30,7 @@ class vector::configure {
     file { $systemd_service_file:
       ensure  => file,
       content => epp('vector/vector.service.epp'),
-      notify  => Service[$vector::service_name],
+      notify  => Class['vector::service'],
     }
   }
 }

@@ -17,19 +17,19 @@ define vector::transform (
   Hash                      $parameters,
   Vector::ValidConfigFormat $format = 'toml',
 ) {
-  $transform_hash = {
-    'transforms' => {
-      $title => $parameters + { 'type' => $type, 'inputs' => $inputs },
-    },
-  }
+  # $transform_hash = {
+  #   'transforms' => {
+  #     $title => $parameters + { 'type' => $type, 'inputs' => $inputs },
+  #   },
+  # }
 
-  $transform_file_name = "${vector::setup::topology_files_dir}/transform_${title}.${format}"
+  $transform_hash = $parameters + { 'type' => $type, 'inputs' => $inputs }
+
+  $transform_file_name = "${vector::setup::transforms_dir}/${title}.${format}"
 
   file { $transform_file_name:
     ensure  => file,
     content => vector::dump_config($transform_hash, $format),
     mode    => '0644',
-    require => File[$vector::setup::topology_files_dir],
-    notify  => Service[$vector::service_name],
   }
 }
