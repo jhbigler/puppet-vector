@@ -17,7 +17,7 @@ vector::user_opts:
   shell: /sbin/nologin
   home: /var/lib/vector
   comment: 'Vector observability data router'
-  groups: ['systend-journal', 'systemd-journal-remote']
+  groups: ['systemd-journal', 'systemd-journal-remote']
 vector::group_opts: {}
   
 vector::environment_file: '/etc/sysconfig/vector'
