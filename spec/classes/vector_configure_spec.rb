@@ -28,9 +28,9 @@ describe 'vector::configure' do
                     [Service]
                     User=vector
                     Group=vector
-                    ExecStartPre=/usr/bin/vector validate
+                    ExecStartPre=/usr/bin/vector validate -C /etc/vector/configs /etc/vector/global.yaml
                     ExecStart=/usr/bin/vector -c /etc/vector/global.yaml -C /etc/vector/configs
-                    ExecReload=/usr/bin/vector validate
+                    ExecReload=/usr/bin/vector validate -C /etc/vector/configs /etc/vector/global.yaml
                     ExecReload=/bin/kill -HUP $MAINPID
                     Restart=no
                     AmbientCapabilities=CAP_NET_BIND_SERVICE
