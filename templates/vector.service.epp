@@ -7,9 +7,9 @@ Requires=network-online.target
 [Service]
 User=<%= $vector::user %>
 Group=<%= $vector::group %>
-ExecStartPre=<%= $vector::vector_executable %> validate
+ExecStartPre=<%= $vector::vector_executable %> validate -C <%= $vector::setup::topology_files_dir %> <%= $vector::configure::global_opts_file %>
 ExecStart=<%= $vector::vector_executable %> -c <%= $vector::configure::global_opts_file %> -C <%= $vector::setup::topology_files_dir %>
-ExecReload=<%= $vector::vector_executable %> validate
+ExecReload=<%= $vector::vector_executable %> validate -C <%= $vector::setup::topology_files_dir %> <%= $vector::configure::global_opts_file %>
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=no
 AmbientCapabilities=CAP_NET_BIND_SERVICE
