@@ -77,7 +77,6 @@ class vector (
   String            $vector_executable,
   Vector::Ensure    $service_ensure,
   Vector::Enabled   $service_enabled,
-
   String            $environment_file,
   String            $service_restart    = "yes",
   Hash              $global_options     = {},
