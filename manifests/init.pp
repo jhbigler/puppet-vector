@@ -45,6 +45,8 @@
 #   Used in the 'service' resource for vector, default true
 # @param service_enabled
 #   Used in the 'service' resource for vector, default true
+# @param service_restart
+#   Used in the generated systemd unit file, default yes
 # @param environment_file
 #   Location of the environment file for Vector
 # @param global_options
@@ -76,6 +78,7 @@ class vector (
   Vector::Ensure    $service_ensure,
   Vector::Enabled   $service_enabled,
   String            $environment_file,
+  String            $service_restart    = "yes",
   Hash              $global_options     = {},
   Hash              $environment_vars   = {},
   Hash              $config_files       = {},
