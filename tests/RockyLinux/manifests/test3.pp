@@ -1,5 +1,5 @@
 class { 'vector':
-  manage_systemd => false,
+  #manage_systemd => false,
   manage_user    => true,
   user_opts      => {},
   version        => '0.30.0',

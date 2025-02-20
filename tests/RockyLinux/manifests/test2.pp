@@ -1,5 +1,5 @@
 class { 'vector':
-  manage_systemd => false,
+  #manage_systemd => false,
   config_dir     => '/opt/vector',
   user           => 'root',
   group          => 'root',

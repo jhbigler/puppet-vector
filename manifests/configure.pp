@@ -32,5 +32,17 @@ class vector::configure {
       content => epp('vector/vector.service.epp'),
       notify  => Class['vector::service'],
     }
+
+    $systemd_dropin_dir = "${systemd_service_file}.d"
+
+    file { $systemd_dropin_dir:
+      ensure  => directory,
+      recurse => true,
+      purge   => true,
+    }
+
+    File[$systemd_dropin_dir] -> Vector::Systemd_dropin<||> ~> Class['vector::service']
+
+    create_resources(vector::systemd_dropin, $vector::systemd_dropins)
   }
 }

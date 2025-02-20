@@ -13,7 +13,7 @@ build_rocky_container() {
 }
 run_rocky_container() {
     echo "Starting the rocky linux container"
-    container_id=`docker run --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host -v ${module_dir}:/etc/puppetlabs/code/modules/vector:ro -d ${rocky_tag}`
+    container_id=`docker run --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host -v ${module_dir}:/etc/puppetlabs/code/modules/vector:z -d ${rocky_tag}`
 }
 stop_rocky_container() {
     docker stop $container_id
@@ -48,7 +48,7 @@ build_ubuntu_container() {
     docker build -t "${ubuntu_tag}" "${ubuntu_dir}/"
 }
 run_ubuntu_test() {
-    docker run -v "${module_dir}:/etc/puppetlabs/code/modules/vector:ro" -it "${rocky_tag}" /usr/local/sbin/test_manifest.sh $1
+    docker run -v "${module_dir}:/etc/puppetlabs/code/modules/vector:z" -it "${rocky_tag}" /usr/local/sbin/test_manifest.sh $1
 }
 
 build_ubuntu_container

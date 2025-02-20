@@ -1,5 +1,14 @@
 class { 'vector':
-  manage_systemd => false,
+  #manage_systemd => false,
+}
+
+$dropin = @(EOT)
+  [Service]
+  LimitNOFILE=65536
+  LimitNPROC=4096
+  | EOT
+vector::systemd_dropin { '00-resource-limits':
+  content => $dropin,
 }
 
 vector::source { 'file':

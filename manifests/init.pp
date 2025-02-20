@@ -46,7 +46,7 @@
 # @param service_enabled
 #   Used in the 'service' resource for vector, default true
 # @param service_restart
-#   Used in the generated systemd unit file, default yes
+#   Used in the generated systemd unit file, default always
 # @param environment_file
 #   Location of the environment file for Vector
 # @param global_options
@@ -61,6 +61,8 @@
 #   Hash of vector::transform instances to create
 # @param sinks
 #   Hash of vector::sink instances to create
+# @param systemd_dropins
+#   Hash of vector::systemd_dropin instances to create
 class vector (
   Optional[String]  $version,
   Boolean           $install_vector,
@@ -78,13 +80,14 @@ class vector (
   Vector::Ensure    $service_ensure,
   Vector::Enabled   $service_enabled,
   String            $environment_file,
-  String            $service_restart    = "yes",
+  String            $service_restart    = 'always',
   Hash              $global_options     = {},
   Hash              $environment_vars   = {},
   Hash              $config_files       = {},
   Hash              $sources            = {},
   Hash              $transforms         = {},
   Hash              $sinks              = {},
+  Hash              $systemd_dropins    = {},
 ) {
   contain vector::install
   contain vector::user
