@@ -18,6 +18,7 @@
 * [`vector::configfile`](#vector--configfile): A type to create a vector config file, composing of sources, transforms, and sinks
 * [`vector::sink`](#vector--sink): Creates a vector sink
 * [`vector::source`](#vector--source): Creates a Vector source
+* [`vector::systemd_dropin`](#vector--systemd_dropin): A systemd dropin file for Vector
 * [`vector::transform`](#vector--transform): Creates a Vector transform
 
 ### Functions
@@ -75,6 +76,7 @@ The following parameters are available in the `vector` class:
 * [`vector_executable`](#-vector--vector_executable)
 * [`service_ensure`](#-vector--service_ensure)
 * [`service_enabled`](#-vector--service_enabled)
+* [`service_restart`](#-vector--service_restart)
 * [`environment_file`](#-vector--environment_file)
 * [`global_options`](#-vector--global_options)
 * [`environment_vars`](#-vector--environment_vars)
@@ -82,6 +84,7 @@ The following parameters are available in the `vector` class:
 * [`sources`](#-vector--sources)
 * [`transforms`](#-vector--transforms)
 * [`sinks`](#-vector--sinks)
+* [`systemd_dropins`](#-vector--systemd_dropins)
 
 ##### <a name="-vector--version"></a>`version`
 
@@ -173,6 +176,14 @@ Data type: `Vector::Enabled`
 
 Used in the 'service' resource for vector, default true
 
+##### <a name="-vector--service_restart"></a>`service_restart`
+
+Data type: `String`
+
+Used in the generated systemd unit file, default always
+
+Default value: `'always'`
+
 ##### <a name="-vector--environment_file"></a>`environment_file`
 
 Data type: `String`
@@ -224,6 +235,14 @@ Default value: `{}`
 Data type: `Hash`
 
 Hash of vector::sink instances to create
+
+Default value: `{}`
+
+##### <a name="-vector--systemd_dropins"></a>`systemd_dropins`
+
+Data type: `Hash`
+
+Hash of vector::systemd_dropin instances to create
 
 Default value: `{}`
 
@@ -355,6 +374,42 @@ Data type: `Vector::ValidConfigFormat`
 File format to save as, default toml
 
 Default value: `'toml'`
+
+### <a name="vector--systemd_dropin"></a>`vector::systemd_dropin`
+
+This defined type allows you to define any artibrary systemd dropin for vector
+User can use either a file source or supply the content directly
+
+#### Examples
+
+##### 
+
+```puppet
+vector::systemd_dropin { '10-resource-limits': source => 'puppet:///deployment/vector/resource-limits.conf' }
+```
+
+#### Parameters
+
+The following parameters are available in the `vector::systemd_dropin` defined type:
+
+* [`source`](#-vector--systemd_dropin--source)
+* [`content`](#-vector--systemd_dropin--content)
+
+##### <a name="-vector--systemd_dropin--source"></a>`source`
+
+Data type: `Optional[String]`
+
+File source for this dropin config
+
+Default value: `undef`
+
+##### <a name="-vector--systemd_dropin--content"></a>`content`
+
+Data type: `Optional[String]`
+
+File content of this dropin config
+
+Default value: `undef`
 
 ### <a name="vector--transform"></a>`vector::transform`
 
