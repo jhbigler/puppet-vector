@@ -1,7 +1,7 @@
 #
 # vector
 #
-# @summary 
+# @summary
 #   Vector module for Puppet
 #
 # Installs, configures, then runs the Vector log and metric tool on RedHat and Debian type systems
@@ -21,8 +21,12 @@
 #   Whether to have this module install Vector. Using this means the version param is ignored
 # @param config_dir
 #   Base directory for configuration, default /etc/vector
+# @param config_dir_mode
+#   File mode for the configuration directory, default 0755
 # @param data_dir
 #   Directory for vector to store buffer and state data
+# @param data_dir_mode
+#   File mode for the data directory, default 0755
 # @param user
 #   What user to run Vector as, default 'vector'
 # @param group
@@ -67,7 +71,9 @@ class vector (
   Optional[String]  $version,
   Boolean           $install_vector,
   String            $config_dir,
+  String            $config_dir_mode,
   String            $data_dir,
+  String            $data_dir_mode,
   String            $user,
   String            $group,
   Boolean           $manage_user,

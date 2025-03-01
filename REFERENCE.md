@@ -64,7 +64,9 @@ The following parameters are available in the `vector` class:
 * [`version`](#-vector--version)
 * [`install_vector`](#-vector--install_vector)
 * [`config_dir`](#-vector--config_dir)
+* [`config_dir_mode`](#-vector--config_dir_mode)
 * [`data_dir`](#-vector--data_dir)
+* [`data_dir_mode`](#-vector--data_dir_mode)
 * [`user`](#-vector--user)
 * [`group`](#-vector--group)
 * [`manage_user`](#-vector--manage_user)
@@ -104,11 +106,23 @@ Data type: `String`
 
 Base directory for configuration, default /etc/vector
 
+##### <a name="-vector--config_dir_mode"></a>`config_dir_mode`
+
+Data type: `String`
+
+File mode for the configuration directory, default 0755
+
 ##### <a name="-vector--data_dir"></a>`data_dir`
 
 Data type: `String`
 
 Directory for vector to store buffer and state data
+
+##### <a name="-vector--data_dir_mode"></a>`data_dir_mode`
+
+Data type: `String`
+
+File mode for the data directory, default 0755
 
 ##### <a name="-vector--user"></a>`user`
 

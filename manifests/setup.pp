@@ -12,23 +12,23 @@ class vector::setup {
   file { $vector::data_dir:
     ensure => directory,
     owner  => $vector::user,
-    mode   => '0755',
+    mode   => $vector::data_dir_mode,
   }
 
   file { $vector::config_dir:
     ensure => directory,
-    mode   => '0755',
+    mode   => $vector::config_dir_mode,
   }
   -> file { $topology_files_dir:
     ensure  => directory,
-    mode    => '0755',
+    mode    => $vector::config_dir_mode,
     recurse => true,
     purge   => true,
     notify  => Class['vector::service'],
   }
   -> file { [$sources_dir, $transforms_dir, $sinks_dir]:
     ensure  => directory,
-    mode    => '0755',
+    mode    => $vector::config_dir_mode,
     recurse => true,
     purge   => true,
     notify  => Class['vector::service'],
