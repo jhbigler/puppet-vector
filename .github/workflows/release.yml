@@ -28,12 +28,6 @@ jobs:
         with:
           args: "build"
 
-      - name: "Create release"
-        run: |
-          gh release create v${{ steps.get_version.outputs.version }} --title v${{ steps.get_version.outputs.version }} -F OUTPUT.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: "Publish module"
         uses: "docker://puppet/pdk:3.0.0.0"
         with:
