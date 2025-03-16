@@ -45,4 +45,11 @@ class vector::configure {
 
     create_resources(vector::systemd_dropin, $vector::systemd_dropins)
   }
+
+  if $vector::notify_on_config_change {
+    Vector::Configfile<||> ~> Class['vector::service']
+    Vector::Source<||> ~> Class['vector::service']
+    Vector::Transform<||> ~> Class['vector::service']
+    Vector::Sink<||> ~> Class['vector::service']
+  }
 }

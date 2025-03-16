@@ -24,17 +24,19 @@ class vector::setup {
     mode    => $vector::config_dir_mode,
     recurse => true,
     purge   => true,
-    notify  => Class['vector::service'],
   }
   -> file { [$sources_dir, $transforms_dir, $sinks_dir]:
     ensure  => directory,
     mode    => $vector::config_dir_mode,
     recurse => true,
     purge   => true,
-    notify  => Class['vector::service'],
   }
 
-  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Source<||> ~> Class['vector::service']
-  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Sink<||> ~> Class['vector::service']
-  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Transform<||> ~> Class['vector::service']
+  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Source<||>
+  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Sink<||>
+  File[$sources_dir, $transforms_dir, $sinks_dir] -> Vector::Transform<||>
+
+  if $vector::notify_on_config_change {
+    File[$sources_dir, $transforms_dir, $sinks_dir] ~> Class['vector::service']
+  }
 }

@@ -87,6 +87,7 @@ The following parameters are available in the `vector` class:
 * [`transforms`](#-vector--transforms)
 * [`sinks`](#-vector--sinks)
 * [`systemd_dropins`](#-vector--systemd_dropins)
+* [`notify_on_config_change`](#-vector--notify_on_config_change)
 
 ##### <a name="-vector--version"></a>`version`
 
@@ -259,6 +260,12 @@ Data type: `Hash`
 Hash of vector::systemd_dropin instances to create
 
 Default value: `{}`
+
+##### <a name="-vector--notify_on_config_change"></a>`notify_on_config_change`
+
+Data type: `Boolean`
+
+
 
 ### <a name="vector--configure"></a>`vector::configure`
 

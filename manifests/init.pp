@@ -86,6 +86,7 @@ class vector (
   Vector::Ensure    $service_ensure,
   Vector::Enabled   $service_enabled,
   String            $environment_file,
+  Boolean           $notify_on_config_change,
   String            $service_restart    = 'always',
   Hash              $global_options     = {},
   Hash              $environment_vars   = {},

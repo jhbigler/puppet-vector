@@ -148,4 +148,25 @@ describe 'vector::configure' do
       is_expected.to contain_file('/etc/vector/configs/sinks/elasticsearch.json')
     end
   end
+
+  # Want to test the notify_on_config_change boolean
+  context 'no notify on change' do
+    let(:pre_condition) do 
+      <<~EOS
+        class {'vector':
+          notify_on_config_change => false,  
+        }
+
+        vector::source {'logs':
+          type => 'file',
+          parameters => {},
+        }
+      EOS
+    end
+
+    it do
+      is_expected.to contain_file('/etc/vector/configs/sources/logs.toml')
+        .with_notify(nil)
+    end
+  end
 end

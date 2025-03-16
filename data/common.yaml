@@ -23,3 +23,4 @@ vector::user_opts:
 vector::group_opts: {}
 
 vector::environment_file: '/etc/sysconfig/vector'
+vector::notify_on_config_change: true
